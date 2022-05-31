@@ -69,7 +69,6 @@ public class PrimeiroProjetoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Categoria cat1 = new Categoria(null, "informatica");
 		Categoria cat2 = new Categoria(null,"Escritorio");
-		
 		Produto p1 = new Produto(null,"computador",2000.00);
 		Produto p2 = new Produto(null,"impressora",800.00);
 		Produto p3 = new Produto(null,"mouse",80.00);
