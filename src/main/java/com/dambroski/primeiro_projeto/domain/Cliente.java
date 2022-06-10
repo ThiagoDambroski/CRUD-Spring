@@ -35,6 +35,9 @@ public class Cliente implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@JsonIgnore
+	private String senha;
+	
 
 	
 	
@@ -54,12 +57,13 @@ public class Cliente implements Serializable {
 		
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo,String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = (tipo==null) ? null :tipo.getCode();
+		this.senha = senha;
 	}
 
 	
@@ -102,6 +106,15 @@ public class Cliente implements Serializable {
 	public void setTipo(TipoCliente tipo) {
 		this.tipo = tipo.getCode();
 	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
@@ -126,6 +139,7 @@ public class Cliente implements Serializable {
 		this.pedidos = pedidos;
 	}
 
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -143,6 +157,7 @@ public class Cliente implements Serializable {
 		return id == other.id;
 	}
 
+	
 	
 	
 	
