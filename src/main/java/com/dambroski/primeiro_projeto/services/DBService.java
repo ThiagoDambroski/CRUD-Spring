@@ -20,6 +20,7 @@ import com.dambroski.primeiro_projeto.domain.PagamentoComCartao;
 import com.dambroski.primeiro_projeto.domain.Pedido;
 import com.dambroski.primeiro_projeto.domain.Produto;
 import com.dambroski.primeiro_projeto.domain.enums.EstadoPagamento;
+import com.dambroski.primeiro_projeto.domain.enums.Perfil;
 import com.dambroski.primeiro_projeto.domain.enums.TipoCliente;
 import com.dambroski.primeiro_projeto.repositories.CategoriaRepository;
 import com.dambroski.primeiro_projeto.repositories.CidadeRepository;
@@ -130,16 +131,21 @@ public class DBService {
 		
 		Cliente cli1 = new Cliente(null,"Maria silva","testesdambroski@gmail.com","36376542377",
 				TipoCliente.PessoaFisica,pe.encode("teste"));
-		
 		cli1.getTelefones().addAll(Arrays.asList("123123412","23312442"));
+		
+		Cliente cli2 = new Cliente(null,"Leticia lima","tdambroskic@gmail.com","32748797035",
+				TipoCliente.PessoaFisica,pe.encode("teste"));
+		cli2.getTelefones().addAll(Arrays.asList("12312123412","2334312442"));
+		cli2.addPerfil(Perfil.ADMIN);
 		
 		Endereco e1 = new Endereco(null,"Rua Flores","300","apto203","jardim","38220",cli1,c1);
 		Endereco e2 = new Endereco(null,"Avenida matos","105","Sala 800","Centro","38130",cli1,c2);
+		Endereco e3 = new Endereco(null,"Avenida brasil","155",null,"Centro","38130",cli2,c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		
-		clienteRository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		clienteRository.saveAll(Arrays.asList(cli1,cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2,e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido ped1 = new Pedido(null,sdf.parse("30/09/2017 10:32"),cli1,e1);
