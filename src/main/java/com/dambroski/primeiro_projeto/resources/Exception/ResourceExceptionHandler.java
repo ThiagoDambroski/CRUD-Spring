@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.dambroski.primeiro_projeto.services.exceptions.AuthorizationExeception;
 import com.dambroski.primeiro_projeto.services.exceptions.DataIntegrityExeception;
 import com.dambroski.primeiro_projeto.services.exceptions.ObjectNotFoundExeception;
 
@@ -35,6 +36,12 @@ public class ResourceExceptionHandler {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(AuthorizationExeception.class)
+	public ResponseEntity<StanderError> Authorization(AuthorizationExeception e,HttpServletRequest request){
+		StanderError erro = new StanderError(HttpStatus.FORBIDDEN.value(), e.getMessage(),System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
 
 }
